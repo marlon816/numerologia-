@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Número do Destino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 80px;
+            text-align: center;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        #significado {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Número do Destino</h1>
+        <p>Digite sua data de nascimento:</p>
+        <div class="inputs">
+            <input type="number" id="dia" placeholder="Dia" min="1" max="31">
+            <input type="number" id="mes" placeholder="Mês" min="1" max="12">
+            <input type="number" id="ano" placeholder="Ano" min="1" max="9999">
+        </div>
+        <button onclick="calcularDestino()">Calcular</button>
+        <div id="resultado"></div>
+        <div id="significado"></div>
+    </div>
+
+    <script>
+        function calcularDestino() {
+            // Obtém os valores dos campos de entrada
+            const dia = document.getElementById("dia").value;
+            const mes = document.getElementById("mes").value;
+            const ano = document.getElementById("ano").value;
+
+            // Verifica se os campos foram preenchidos corretamente
+            if (!dia || !mes || !ano || dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1) {
+                document.getElementById("resultado").innerText = "Por favor, insira uma data válida.";
+                document.getElementById("significado").innerText = "";
+                return;
+            }
+
+            // Junta os valores em uma única string de dígitos
+            const digitos = `${dia}${mes}${ano}`;
+
+            // Soma os dígitos
+            let soma = digitos.split("").reduce((acc, digito) => acc + parseInt(digito, 10), 0);
+
+            // Reduz para um número entre 1 e 9 ou números mestres
+            while (soma > 9 && ![11, 22, 33].includes(soma)) {
+                soma = soma.toString().split("").reduce((acc, digito) => acc + parseInt(digito, 10), 0);
+            }
+
+            // Significados dos números
+            const significados = {
+                1: `<h2>Atributos</h2>
+<p><strong>POSITIVOS:</strong> Individualidade, Liderança, Criatividade, Positividade, Energia Ativa, Ambição, Persistência, Autoconfiança, Audácia.</p>
+<p><strong>NEGATIVOS:</strong> Egocentrismo, Autoritarismo, Imitação, Repressão, Dependência, Preguiça, Passividade, Receio, Fraqueza.</p>
+
+<h2>Ano Pessoal Número 1</h2>
+<h3>Início do Ciclo de 9 Anos</h3>
+<p>Marca o começo de um novo ciclo de experiências e desenvolvimento pessoal.</p>
+<h3>Objetivo Principal</h3>
+<p>Refinar habilidades e desempenho baseados nas metas pessoais.</p>
+<h3>Renascimento e Mudanças</h3>
+<p>Para a maioria, é um período de renovação e novos interesses.</p>
+<p>Para outros, é a oportunidade de ampliar e redefinir interesses e esquemas.</p>
+
+<h3>Período de Ajustes (Janeiro a Agosto)</h3>
+<p>Amarrar os pontos soltos do ano anterior.</p>
+<p>Preparar o terreno para novas ações e metas.</p>
+
+<h3>Intensificação e Clareza (Setembro)</h3>
+<p>O ano ganha força, com mais clareza de propósito e aumento da atividade.</p>
+
+<h3>Características do Ano</h3>
+<ul>
+  <li><strong>Mudança e pensamento independente:</strong> São centrais.</li><br>
+  <li><strong>Começo Lento:</strong> O ano começa devagar, mas ganha ritmo.</li><br>
+  <li><strong>Reviravoltas:</strong> Ideias e planos podem mudar inesperadamente, especialmente em abril.</li><br>
+  <li><strong>Tomada de Controle (Julho):</strong> O indivíduo deve planejar, agir e construir seu caminho.</li><br>
+  <li><strong>Abandono de Compromissos (Agosto):</strong> Deixar para trás compromissos antigos.</li><br>
+  <li><strong>Foco em Novos Caminhos e Ambições:</strong> Criar novas trilhas e métodos para o futuro.</li><br>
+  <li><strong>Projetos iniciados:</strong> Só irão se concretizar no Ano Pessoal Número 3; paciência é necessária.</li><br>
+  <li><strong>Uniões e Parcerias:</strong> Parcerias iniciadas podem se desenvolver, mas não é um ano para grandes sacrifícios por outros.</li><br>
+  <li><strong>Autopromoção:</strong> Preparar o terreno para a promoção pessoal e independência.</li><br>
+  <li><strong>Objetivos pessoais:</strong> Buscar objetivos pessoais, sem reprimir ideias ou ações.</li><br>
+  <li><strong>As mudanças deste ano:</strong> Definirão as pessoas que acompanharão o ciclo dos próximos 8 anos.</li><br>
+</ul>
+
+<h2>Mês Pessoal Número 1</h2>
+<h3>Características</h3>
+<p>Mês operoso e ativo, onde o indivíduo deve tomar a iniciativa.</p>
+<p>Período para realizar tarefas pendentes de meses anteriores.</p>
+
+<h3>Novas Oportunidades</h3>
+<p>Surgem novas pessoas, situações e ideias.</p>
+<p>O indivíduo assume o controle das situações e toma as rédeas de sua vida.</p>
+
+<h3>Ação e Decisão</h3>
+<p>O 1 deve ser agressivo e proativo para implementar mudanças.</p>
+<p>Decisões devem ser tomadas de forma independente e intelectual, sem depender de apoio externo.</p>
+
+<h3>Foco</h3>
+<p>Priorizar novos começos e iniciar projetos importantes.</p>
+<p>O Mês Pessoal Número 1 é um período dinâmico para tomar decisões e agir, focando em novas oportunidades e mudanças.</p>
+
+<h2>Dia Pessoal Número 1</h2>
+<h3>Atitude Determinada</h3>
+<p>Comece o dia com uma mentalidade focada e confiante.</p>
+<p>Se estiver lidando com um novo emprego, cliente ou situação, adote um enfoque novo e inteligente.</p>
+
+<h3>Intuição e Controle</h3>
+<p>A percepção extra-sensorial está afiada, use a intuição para tomar decisões.</p>
+<p>Mantenha-se firme nas convicções e evite perder o controle.</p>
+
+<h3>Oportunidades e Criatividade</h3>
+<p>O dia oferece novas perspectivas; aproveite para ser original e se destacar.</p>
+<p>A ambição, autoconfiança e criatividade estarão em alta.</p>
+
+<h3>Energia e Autonomia</h3>
+<p>Ative um estado de ânimo energético e independente.</p>
+<p>Use roupas vibrantes (como vermelho) para reforçar o ânimo.</p>
+
+<h3>Planejamento e Ação</h3>
+<p>Planeje cuidadosamente seus compromissos e tenha uma meta definida.</p>
+<p>Use avaliações práticas para garantir que suas ideias se concretizem.</p>
+<p>O dia é para começar algo novo e agir de forma decisiva.</p>
+
+<h2>Profissões para Número 1</h2>
+<h3>Características</h3>
+<p>O número 1 se destaca em atividades que envolvem liderança, ousadia, persistência e inovação.</p>
+<p>Precisa de liberdade e autonomia para agir, o que pode ser alcançado em profissões autônomas ou no próprio negócio.</p>
+<p>Desenvolve facilidade em ambientes competitivos e lida bem com pressão.</p>
+<br>
+<h3>Áreas de atuação recomendadas</h3>
+<ul>
+  <li><strong>Cargos de liderança:</strong> Administração, gerência.</li>
+  <li><strong>Profissões autônomas:</strong> Empresário, profissional liberal.</li>
+  <li><strong>Outras áreas:</strong> Comércio, indústria, advocacia, arquitetura, construção civil, consultoria, design, esportes, finanças, publicidade.</li>
+</ul>
+<br>
+<p><strong>Importante:</strong> O mais essencial é manifestar as características principais do número 1, independentemente da profissão escolhida.</p>
+
+<h3>Palavras-chave</h3>
+<p>Original, independente, pioneiro, dominante, líder, criativo, comando, ambição, persistência, autoconfiança, audácia.</p>`,
+
+
+                2: `<h1>ATRIBUTOS:</h1>
+    <h2>POSITIVOS</h2>
+    <ul>
+        <li>Colaborador</li>
+        <li>Atencioso</li>
+        <li>Diplomático</li>
+        <li>Emocional</li>
+        <li>Modesto</li>
+        <li>Paciente</li>
+        <li>Solidário</li>
+        <li>Compassivo</li>
+        <li>Receptivo</li>
+        <li>Adaptável</li>
+    </ul>
+    
+    <h2>NEGATIVOS</h2>
+    <ul>
+        <li>Insensível</li>
+        <li>Pusilânime</li>
+        <li>Descortês</li>
+        <li>Descuidado</li>
+        <li>Crítico</li>
+        <li>Tímido</li>
+        <li>Medroso</li>
+        <li>Desinteressado</li>
+        <li>Indiferente</li>
+        <li>Manhoso</li>
+    </ul>
+
+    <h1>Numerologia 2 - Desafio de Sensibilidade e Relacionamentos</h1>
+    <p>O número 2 está intimamente relacionado à sensibilidade, empatia, e os desafios enfrentados nas interações e percepções emocionais. Os indivíduos com o número 2 em sua numerologia, principalmente quando enfrentam esse desafio, tendem a ter uma experiência marcada pela extrema sensibilidade emocional, o que pode gerar tanto benefícios quanto dificuldades nas suas relações interpessoais e no autoconhecimento.</p>
+    
+    <h2>Lado Positivo:</h2>
+    <ul>
+        <li><strong>Empatia e Sensibilidade:</strong> A pessoa com o número 2 possui uma sensibilidade aguçada, o que lhe permite perceber as necessidades e emoções dos outros. Isso se traduz em uma capacidade natural para confortar e ajudar aqueles ao seu redor. Essa empatia é vista como uma qualidade de profundidade emocional, tornando esses indivíduos excelentes amigos e parceiros.</li>
+        <li><strong>Capacidade de Cooperação:</strong> O número 2 é um excelente cooperador. Ele busca a harmonia e o equilíbrio nos relacionamentos, trabalhando bem em equipe e com os outros. Sua habilidade para colaborar e integrar as necessidades alheias nas suas próprias ações torna-o muito apreciado e confiável.</li>
+        <li><strong>Intuição e Receptividade:</strong> O número 2 é intuitivo e compreende as nuances da comunicação não-verbal. A receptividade emocional permite-lhe ser mais aberto e capaz de captar informações sutis, muitas vezes indo além das palavras. Eles sabem, de alguma forma, o que os outros necessitam sem que isso seja explicitado.</li>
+        <li><strong>Diplomacia e Suavidade:</strong> O número 2, devido à sua natureza calma e paciente, é um excelente diplomata. Ele tem a habilidade de mediar conflitos de maneira gentil, sendo capaz de suavizar tensões e buscar soluções pacíficas. A necessidade de harmonia dentro do ambiente de trabalho ou pessoal é um reflexo dessa qualidade.</li>
+        <li><strong>Altruísmo e Cuidados:</strong> Este número tende a nutrir e cuidar dos outros com generosidade, muitas vezes se colocando em segundo plano para atender às necessidades dos outros. Esse altruísmo é uma característica profundamente respeitada, e as ações de cuidar dos outros são vistas como um sinal de grande compaixão.</li>
+    </ul>
+
+    <h2>Lado Negativo:</h2>
+    <ul>
+        <li><strong>Insegurança e Dependência Emocional:</strong> Uma das dificuldades enfrentadas pelo número 2 é a insegurança emocional. Devido à sua necessidade de aprovação dos outros, podem se tornar excessivamente dependentes emocionalmente, sentindo que não conseguem viver sem o apoio de outras pessoas. Isso pode afetar sua autoestima e a confiança em suas próprias decisões.</li>
+        <li><strong>Excesso de Sensibilidade:</strong> Embora a sensibilidade seja uma qualidade positiva, ela também pode ser uma fraqueza. O número 2 pode se sentir profundamente magoado ou ofendido com críticas, que podem ser vistas de maneira exagerada ou interpretadas de forma negativa, levando a uma excessiva autocrítica e a dificuldade de lidar com conflitos.</li>
+        <li><strong>Indecisão:</strong> O número 2 tem uma tendência a ser indeciso, especialmente em momentos de pressão. A dificuldade em tomar decisões se deve à sua habilidade de ver ambos os lados de uma situação, mas isso pode torná-los hesitantes e até paralisados pela incerteza. Eles podem sofrer ao tentar agradar a todos, o que os torna mais vulneráveis a escolhas erradas.</li>
+        <li><strong>Manejo Deficiente da Autossuficiência:</strong> Indivíduos com o número 2 podem se sentir como se não fossem capazes de se sustentar sozinhos, sendo facilmente influenciados pelas opiniões e expectativas dos outros. Isso pode levar a sentimentos de inadequação e de se sentir inferior. A autossuficiência emocional é algo que precisa ser trabalhado ao longo da vida, pois a dependência dos outros pode impedir o crescimento pessoal.</li>
+        <li><strong>Tendência à Manipulação e Submissão:</strong> Quando o número 2 se sente ameaçado ou inseguro, pode recorrer à manipulação para obter o que deseja. Esse comportamento é um reflexo da sua incapacidade de se afirmar de maneira direta. Alternativamente, podem ser excessivamente submisso, buscando agradar a todos ao seu redor, mas isso pode levar a situações de abuso ou exploração emocional.</li>
+        <li><strong>Autossacrifício Excessivo:</strong> O número 2 pode se sacrificar demais pelos outros, negligenciando suas próprias necessidades. Esse comportamento pode causar frustração interna e até esgotamento físico e emocional. Eles tendem a se colocar em segundo plano, o que pode resultar em sentimentos de ressentimento e, eventualmente, em depressão.</li>
+        <li><strong>Fuga de Conflitos:</strong> O número 2, em seu desejo de evitar confrontos, pode fugir de situações difíceis, preferindo pacificar as coisas e ignorar problemas reais. Isso pode resultar em soluções temporárias para questões que, no longo prazo, se acumulam e criam desarmonias maiores, especialmente nas relações mais próximas.</li>
+        <li><strong>Percepção Disturbada de Intimidade e Relacionamentos:</strong> Indivíduos com o número 2, em certos momentos, podem ter uma visão distorcida do que é um relacionamento saudável. Eles podem ser excessivamente cautelosos e sensíveis à rejeição, o que pode fazer com que se afastem ou, por outro lado, se apeguem de forma excessiva a relações tóxicas, tentando preencher suas carências emocionais.</li>
+    </ul>
+
+    <h2>Equilíbrio e Crescimento:</h2>
+    <p>O desafio do número 2 é aprender a confiar em si mesmo e nos outros de maneira equilibrada, sem se perder nas próprias sensibilidades ou nas expectativas dos outros. Ao desenvolver confiança em sua autossuficiência emocional e aprender a lidar com a dor e a rejeição de maneira construtiva, o número 2 pode alcançar uma verdadeira harmonia nos relacionamentos e uma maturidade emocional. O desafio está em encontrar o equilíbrio entre o altruísmo e o autocuidado, e não se deixar dominar pela dúvida ou pela necessidade constante de aprovação externa.</p>
+
+    <h1>Ano Pessoal 2 - Significado Profundo</h1>
+    <h2>Tema Principal: Colaboração, paciência, e reflexão.</h2>
+    <p>O ano pessoal número 2 é o segundo ano de um ciclo de nove anos e é um período de crescimento baseado nas sementes plantadas no ano pessoal 1. Em vez de ações ousadas e independentes, o número 2 se concentra na necessidade de construir e solidificar aquilo que foi iniciado no ano anterior. Este ano exige uma abordagem de sensibilidade e diplomacia para lidar com as relações e desafios que surgem.</p>
+    
+    <h2>Características Principais do Ano Pessoal 2:</h2>
+    <ul>
+        <li><strong>Reforço das Relações:</strong> Este é um período onde as relações pessoais e profissionais são testadas. O número 2 destaca a importância da cooperação, da escuta ativa e da negociação pacífica.</li>
+        <li><strong>Desaceleração e Reflexão:</strong> Após a atividade intensa do ano pessoal 1, este ano pede uma desaceleração. É um período em que a paciência e a calma são essenciais para o crescimento e o amadurecimento.</li>
+        <li><strong>Apreendizado e Humildade:</strong> Este é um período de aprendizado, onde o indivíduo deve observar e absorver informações sem pressa. Humildade é a palavra-chave. Em vez de buscar liderança ou mudanças rápidas, é melhor ficar atento aos detalhes e esperar pelos resultados nos próximos anos.</li>
+        <li><strong>Dificuldades Menores e Desafios Interiores:</strong> Pequenos abores e atrasos podem surgir, mas o foco deve ser em preservar relacionamentos e em manter a harmonia em meio às adversidades. Embora o ano seja calmo e introspectivo, pode haver desafios internos como dúvidas e inseguranças.</li>
+        <li><strong>Desafios Emocionais:</strong> O número 2 também tem uma forte ligação emocional com o ciclo, o que pode gerar períodos de vulnerabilidade, insegurança e indecisão. Em vez de se lançar em novos projetos, é um bom momento para solidificar alianças e cuidar dos relacionamentos pessoais.</li>
+    </ul>
+
+    <h1>Mês Pessoal 2 - Significado Profundo</h1>
+    <h2>Tema Principal: Cooperação e delicadeza nas interações.</h2>
+    <p>No mês pessoal número 2, o foco está nas relações pessoais, sendo um período para nutrir e fortalecer os laços com amigos, parceiros e familiares. Mudanças grandes ou novas iniciativas devem ser adiadas neste mês, pois a energia é mais receptiva e voltada para o cuidado emocional.</p>
+    
+    <h2>Características Principais do Mês Pessoal 2:</h2>
+    <ul>
+        <li><strong>Prioridade nas Relações:</strong> A energia deste mês convida o indivíduo a dar atenção aos outros, focando na felicidade e bem-estar das pessoas próximas. As ambições pessoais podem ser postergadas, enquanto as interações sociais assumem um papel central.</li>
+        <li><strong>Reflexão e Tato:</strong> O mês pode trazer situações que exigem tato e diplomacia para lidar com as diferenças. Ouça com atenção as necessidades dos outros e aja com compreensão e delicadeza.</li>
+        <li><strong>Calma e Reflexão:</strong> Este mês pede para que se faça uma pausa, repensando ações passadas e permitindo que as situações se desenrolem de forma natural. Evite pressa e busque restabelecer o equilíbrio emocional.</li>
+        <li><strong>Desafios Interiores:</strong> Pode ser um mês de falta de energia ou de sensação de estagnação. O indivíduo deve trabalhar a paciência e a aceitação, entendendo que nem todos os problemas precisam ser resolvidos imediatamente. A chave é a adaptabilidade.</li>
+    </ul>
+
+    <h1>Dia Pessoal 2 - Significado Profundo</h1>
+    <h2>Tema Principal: Sensibilidade e apoio.</h2>
+    <p>O dia pessoal número 2 foca em ações suaves e equilibradas, com uma forte ênfase na sensibilidade emocional e na cooperação. Neste dia, as interações com outras pessoas, especialmente com aqueles próximos, são fundamentais para manter a harmonia.</p>
+    
+    <h2>Características Principais do Dia Pessoal 2:</h2>
+    <ul>
+        <li><strong>Resposta Sensível aos Outros:</strong> O indivíduo deve responder com sensibilidade às necessidades dos outros. Este é um bom dia para oferecer ajuda aos outros e ser generoso em suas interações.</li>
+        <li><strong>Evitar Conflitos:</strong> Este não é um dia propício para confrontos ou para impor mudanças drásticas. Em vez disso, o foco deve ser em manter a paz e em manter a serenidade, mesmo diante de desafios.</li>
+        <li><strong>Trabalho nos Detalhes:</strong> O dia favorece tarefas que exigem cuidado e paciência, como organização e atendimento a pequenas necessidades. Evite grandes projetos ou decisões apressadas.</li>
+        <li><strong>Desafios Interiores:</strong> Pode haver uma sensação de lentidão ou de estar sendo ignorado, mas é importante lembrar que a calma é necessária para o equilíbrio. Se alguém pisar no seu pé, seja gentil e não reaja impulsivamente. Este é um dia para cuidar dos relacionamentos e manter a paz no ambiente.</li>
+    </ul>`,
+                3: ` <h1>A Numerologia do Número 3</h1>
+    <p>A numerologia do número 3, que se refere à expressão, comunicação e criatividade, pode ser entendida de maneira mais profunda ao olhar tanto os aspectos positivos quanto negativos dessa energia. Abaixo, exploramos detalhadamente essas características, considerando as nuances dos atributos positivos e negativos associados ao número 3.</p>
+
+    <h2>Aspectos Positivos do Número 3:</h2>
+    <ul>
+        <li><strong>Otimista</strong> – O número 3 é naturalmente otimista, com uma visão positiva sobre a vida. As pessoas com esta vibração tendem a ver o lado bom das situações, transmitindo uma sensação de esperança e confiança aos outros.</li>
+        <li><strong>Imaginativo</strong> – As pessoas do número 3 possuem uma rica vida interior e uma imaginação fértil. São criativas, com uma capacidade de pensar fora da caixa, o que lhes permite inovar e expressar ideias únicas.</li>
+        <li><strong>Talentoso</strong> – Com habilidades artísticas e criativas, o número 3 se destaca em campos como música, dança, escrita, e outras formas de expressão. Ele possui o dom de criar e comunicar de forma envolvente.</li>
+        <li><strong>Sociável</strong> – São extrovertidos, gostam de interagir com os outros e se destacam em ambientes sociais. O número 3 gosta de estar no centro das atenções, encantando com seu charme e capacidade de comunicação.</li>
+        <li><strong>Divertido</strong> – Naturalmente engraçados e espirituosos, as pessoas com essa energia sabem como animar um ambiente. São as "almas da festa" e têm um grande talento para fazer os outros rirem.</li>
+        <li><strong>Bom gosto</strong> – Tendem a ter um senso refinado de estética e estilo, seja na moda, decoração ou arte. São sensíveis à beleza e sabem apreciá-la.</li>
+        <li><strong>Feliz</strong> – Geralmente, as pessoas do número 3 têm uma disposição alegre e positiva, tornando-se fontes de energia e vitalidade para os outros.</li>
+        <li><strong>Falador</strong> – Com uma habilidade única para se expressar verbalmente, os indivíduos 3 são eloquentes e comunicativos. Eles sabem como manter uma conversa envolvente e muitas vezes são excelentes contadores de histórias.</li>
+        <li><strong>Jovem</strong> – O número 3 mantém uma natureza jovem e vibrante ao longo da vida, independentemente da idade. Sua energia refrescante e desejo de se manter ativo e curioso contribuem para essa juventude de espírito.</li>
+        <li><strong>Cordial</strong> – São pessoas amigáveis, com um comportamento caloroso e acolhedor, fazendo com que os outros se sintam confortáveis e à vontade em sua presença.</li>
+        <li><strong>Ávido</strong> – Estão sempre em busca de novas experiências e conhecimentos. A curiosidade e a sede de aprender fazem parte de sua essência.</li>
+    </ul>
+
+    <h2>Aspectos Negativos do Número 3:</h2>
+    <ul>
+        <li><strong>Desarticulado</strong> – Embora comunicativos, a energia do número 3 pode ser desorganizada, e os indivíduos podem ter dificuldade em expressar seus pensamentos de forma clara e coesa, o que pode causar confusão.</li><br>
+        <li><strong>Queixoso</strong> – Quando as coisas não saem como esperam, eles podem ser propensos a se lamentar e se queixar, deixando de focar nas soluções e se concentrando nos problemas.</li><br>
+        <li><strong>Extravagante</strong> – O número 3 pode ser excessivamente extravagante, tanto na forma de se vestir quanto nas suas ações. Sua necessidade de atenção pode levá-los a comportamentos exagerados ou impulsivos.</li><br>
+        <li><strong>Superficial</strong> – Em alguns momentos, podem se tornar excessivamente focados em aparência e status, negligenciando aspectos mais profundos e significativos da vida. Sua tendência a se prender à superfície pode impedi-los de ver a verdadeira essência das coisas.</li><br>
+        <li><strong>Fofoqueiro</strong> – A natureza comunicativa do número 3 pode, às vezes, se transformar em fofoca. Eles podem se envolver em conversas fúteis e comentários sobre a vida alheia, prejudicando relações e perdendo a confiança dos outros.</li><br>
+        <li><strong>Narcisista</strong> – Uma forte preocupação consigo mesmos e com a aparência pode fazer com que o número 3 se torne egocêntrico. Eles podem buscar validação constante, ignorando as necessidades e os sentimentos dos outros.</li><br>
+        <li><strong>Derrotado</strong> – Quando as coisas não vão bem, o número 3 pode se sentir derrotado e, em vez de lutar, pode se entregar à tristeza ou desânimo. A falta de persistência pode ser um obstáculo.</li><br>
+        <li><strong>Distanciado</strong> – Embora sociáveis, podem às vezes se afastar emocionalmente dos outros, criando uma fachada de desconexão quando sentem que não estão sendo compreendidos ou quando se deparam com dificuldades emocionais.</li><br>
+        <li><strong>Mentiroso</strong> – A tendência ao exagero ou à criação de histórias pode levar o número 3 a distorcer a verdade ou até mentir para manter sua imagem ou chamar atenção. Eles podem ser impulsivos em suas declarações, nem sempre refletindo a realidade.</li><br>
+    </ul>
+
+    <h2>Desafios do Número 3:</h2>
+    <p>O número 3 apresenta desafios relacionados à auto-expressão e à identidade social. Uma criança ou adulto com essa vibração pode ser excessivamente sensível à maneira como é percebido pelos outros, levando a comportamentos que podem ser dramáticos ou ilusórios. Além disso, o número 3 pode experimentar oscilações emocionais extremas, sendo eufórico ou muito melancólico, dependendo das circunstâncias.</p>
+    <p>Quando mal equilibrados, o número 3 pode cair na armadilha de viver para agradar aos outros ou de se isolar na sua própria bolha emocional. Os indivíduos com essa energia precisam aprender a usar sua imaginação de maneira construtiva e a encontrar um equilíbrio entre o mundo interior e o exterior.</p>
+
+    <h2>Lado Positivo da Maturidade para o Número 3:</h2>
+    <p>À medida que amadurecem, aqueles com a vibração 3 podem aprender a canalizar sua criatividade de maneira mais focada e prática, sem perder sua essência otimista e comunicativa. Ao equilibrar a necessidade de expressão pessoal com a responsabilidade, eles podem se tornar influentes líderes, artistas, ou qualquer outro tipo de pessoa que precise conectar-se com os outros de maneira significativa.</p>
+    <p>Com o tempo, o número 3 pode aprender a ser mais autêntico e a se comprometer com seus projetos e relacionamentos de forma mais profunda, abandonando a superficialidade em troca de uma verdadeira conexão emocional.</p>
+    <p>Se equilibrado, o número 3 pode ser uma das energias mais iluminadas e impactantes, sempre trazendo alegria, criatividade e expressão para os outros e para si mesmo.</p>
+
+    <h2>Ano Pessoal 3</h2>
+    <h3>Contexto e Objetivo</h3>
+    <p>O ano pessoal 3 é o terceiro em um ciclo de nove anos e é marcado por um apuro e aprimoramento do desempenho com base nas metas do primeiro ano. Esse ano traz consigo a maturidade para aproveitar as ideias e projetos iniciados nos anos anteriores, especialmente no que se refere à realização de objetivos que envolvem expressão pessoal, criatividade e comunicação.</p>
+
+    <h3>Mudança e Oportunidades</h3>
+    <p>Após um período de dificuldades e preocupações emocionais, o ano 3 oferece uma mudança de ritmo. É uma fase para aliviar tensões, explorar interesses mais leves, expandir os contatos sociais e se divertir. O foco é a diversão, as modas e novidades, como roupas e decoração para atrair energia positiva ao ambiente.</p>
+
+    <h3>Relaciones e Diversão</h3>
+    <p>O amor, o romance e a felicidade são enfatizados, e as conexões sociais (principalmente por telefone e correspondência) têm grande potencial para promover novas oportunidades comerciais e pessoais. É o ano para fazer pausas, curtir as férias, e participar de atividades artísticas e sociais, com os amigos atuando como pontes para acesso a negócios e novas experiências.</p>
+
+    <h3>Desafios e Direção</h3>
+    <p>Apesar das oportunidades e da diversão, o ano exige foco nas metas principais, para que o tempo e os recursos não sejam desperdiçados em atividades superficiais. O ano é para cultivar a alegria e a leveza, e embora o romance e as interações sociais sejam importantes, é essencial manter um equilíbrio entre prazer e produtividade. O ano prepara o terreno para o próximo ciclo mais voltado para a prática e o trabalho duro (ano 4).</p>
+
+    <h3>Função e Propósito</h3>
+    <p>Este período tem a intenção de aliviar as pressões dos anos anteriores, promover o prazer e fortalecer os laços com as pessoas. Também é uma oportunidade para relembrar a importância da criança interior, incentivando um olhar mais leve e otimista sobre a vida. A compreensão de que a vida pode ser bela e divertida é central.</p>
+
+    <h2>Mês Pessoal 3</h2>
+    <h3>Energia e Foco</h3>
+    <p>O mês pessoal 3 oferece uma energia de descontração, animação e expressão pessoal. Durante este mês, o indivíduo deve se focar em ser sociável, participar de festas e eventos, e se comunicar com alegria e espontaneidade. As interações sociais são fundamentais, e o mês é favorável para reatar amizades antigas e fazer novas conexões.</p>
+
+    <h3>Atividades e Planejamento</h3>
+    <p>Este é o momento de dar vida aos projetos iniciados nos meses anteriores e comunicar os avanços para outras pessoas. O estilo e a aparência pessoal são importantes, assim como a disposição para entreter e ser entretido. Comprar roupas e renovar a decoração da casa são atividades que fazem sentido nesse período, pois trazem um toque de frescor e prazer.</p>
+
+    <h3>Interações e Criatividade</h3>
+    <p>Além das interações sociais, o mês é ótimo para exibir talentos e se divertir ao interagir com os outros. A ideia é aproveitar ao máximo os momentos de lazer, manter um espírito positivo e compartilhá-lo com quem está ao redor. A criatividade e a expressão pessoal estão em alta, sendo o momento ideal para mostrar o que foi pensado ou criado.</p>
+
+    <h2>Dia Pessoal 3</h2>
+    <h3>Atitude e Energia</h3>
+    <p>O dia pessoal 3 é marcado por uma abordagem alegre e animada. O foco está em manter uma atitude otimista e divertida, independentemente das circunstâncias. O trabalho, quando realizado com essa atitude positiva, pode se transformar em algo mais leve e prazeroso, sendo contagiante para os outros ao redor.</p>
+
+    <h3>Interações e Relaxamento</h3>
+    <p>Embora o dia possa ser caracterizado por muita conversa e pouca ação, ele serve para relaxar e se preparar para um futuro mais focado e disciplinado. O objetivo é não se deixar abater por negatividade e, ao invés disso, usar o dia para alegrar os outros, criar conexões e cuidar do próprio bem-estar, seja por meio de hobbies, lazer ou socialização.</p>
+
+    <h3>Foco em Prazer e Descontração</h3>
+    <p>Este é o dia para curtir as coisas simples da vida, como passar tempo com crianças e animais, assistir a um espetáculo ou rir com amigos. A agenda de trabalho pode ser mais flexível, com mais espaço para momentos de diversão, conversas agradáveis e descontração. Embora alguns projetos exijam planejamento, o foco maior é na leveza e no prazer do momento presente.</p>`,
+                4: "Trabalho duro, estabilidade e praticidade.",
+                5: "Liberdade, aventura e curiosidade.",
+                6: "Responsabilidade, amor e equilíbrio.",
+                7: "Espiritualidade, introspecção e sabedoria.",
+                8: "Poder, ambição e sucesso material.",
+                9: "Altruísmo, compaixão e humanidade.",
+                11: "Intuição, idealismo e inspiração.",
+                22: "Realização, visão e potencial.",
+                33: "Serviço à humanidade, amor universal e espiritualidade elevada."
+            };
+
+            // Exibe o resultado e o significado
+            document.getElementById("resultado").innerText = `Seu Número do Destino é: ${soma}`;
+            document.getElementById("significado").innerHTML = significados[soma] || "Significado não encontrado.";
+        }
+    </script>
+</body>
+</html>
